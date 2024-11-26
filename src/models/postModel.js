@@ -8,3 +8,10 @@ export async function getAllPosts() {
 
   return collection.find().toArray();
 }
+
+export async function addNewPost(newPost) {
+  const db = connectDB.db('imersao-insta-bytes');
+  const collection = db.collection('posts');
+
+  return collection.insertOne(newPost);
+}
