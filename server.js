@@ -2,20 +2,19 @@ import express from 'express';
 
 const posts = [
   {
-    descricao: 'uma foto teste',
-    imagem: 'https://placecats.com/millie/300/150',
+    id: 1,
+    description: 'uma foto de gato',
+    image: 'https://placecats.com/millie/300/150',
   },
   {
-    descricao: 'gato fazendo yoga',
-    imagem: 'https://placecats.com/millie/300/150',
+    id: 2,
+    description: 'um gato fazendo yoga',
+    image: 'https://placecats.com/millie/300/150',
   },
   {
-    descricao: 'gato fazendo panqueca',
-    imagem: 'https://placecats.com/millie/300/150',
-  },
-  {
-    descricao: 'gato olhando pela janela',
-    imagem: 'https://placecats.com/millie/300/150',
+    id: 3,
+    description: 'um gato fazendo panqueca',
+    image: 'https://placecats.com/millie/300/150',
   },
 ];
 
@@ -28,4 +27,16 @@ app.listen(3000, () => {
 
 app.get('/posts', (req, res) => {
   res.status(200).json(posts);
+});
+
+function getPostById(id) {
+  return posts.findIndex((post) => {
+    return post.id === Number(id);
+  });
+}
+
+app.get('/posts/:id', (req, res) => {
+  const index = getPostById(req.params.id);
+
+  res.status(200).json(posts[index]);
 });
